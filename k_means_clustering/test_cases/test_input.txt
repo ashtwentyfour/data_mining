@@ -1,0 +1,5 @@
+ID    country    weight_index  pH 
+A      India       1           1
+B      US          2           1
+C      UK          4           3
+D      Canada      5           4
