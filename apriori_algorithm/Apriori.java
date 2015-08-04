@@ -31,7 +31,7 @@ public class Apriori {
 	
      public Set<Set<String>> freq_itemsets(String input_file , int min_sup) {
     	 
-       if(min_sup == 0) 
+       if(min_sup <= 0) 
     	   throw new IllegalArgumentException("min_sup > 0");
     	   
 	   /* input table with transaction -> items mapping */	 
