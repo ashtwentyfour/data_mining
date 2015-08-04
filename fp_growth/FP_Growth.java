@@ -26,6 +26,9 @@ public class FP_Growth {
 	
 	public void fp_algorithm(String file , int minsup) {
 		
+		if(minsup <= 0)
+			throw new IllegalArgumentException("minsup > 0");
+		
 	    HashMap<String , Set<String>> table = new HashMap<String , Set<String>>();
 	    
 	    try {
