@@ -29,10 +29,11 @@ public class FP_Growth {
 		if(minsup <= 0)
 			throw new IllegalArgumentException("minsup > 0");
 		
+		/* create a table of transactions */
 	    HashMap<String , Set<String>> table = new HashMap<String , Set<String>>();
 	    
 	    try {
-			table = create_table(file);   // use file to generate table 
+			table = create_table(file);   // use input file to generate table 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,28 +44,47 @@ public class FP_Growth {
 	
 	
 	
+	/**
+	 * 
+	 * @param table input table of transactions 
+	 * @param minsup minimum support value 
+	 * 
+	 */
+	
 	private void find_freq_patterns(HashMap<String , Set<String>> table , int minsup) {
 		
+		/* get each single item and its frequency */
 	    HashMap<String , Integer> L = find_freq_1_itemsets(table , minsup);
 	    
-	    List<String> sorted_by_supp_count = new ArrayList<String>(sort_by_supp_count(L));
+	    List<String> sorted_by_supp_count = new 
+	    	ArrayList<String>(sort_by_supp_count(L));
 	    
-	    HashMap<String , List<String>> new_table = new HashMap<String , List<String>>();
+	    HashMap<String , List<String>> new_table = new 
+	    		HashMap<String , List<String>>();
+	    
 	    new_table = sort_in_L_order(table , sorted_by_supp_count);
 	    
-		FP_Tree tree = new FP_Tree();
+		FP_Tree tree = new FP_Tree();  // new FP growth tree
         
         tree = construct_fp_tree(new_table);
 		
         List<Itemset> freq_items = new ArrayList<Itemset>();
         
-        
         Set<String> alpha = null;
-        mine_itemsets(L , tree , sorted_by_supp_count , minsup , freq_items , alpha);
+        mine_itemsets(L , tree , sorted_by_supp_count , 
+        		minsup , freq_items , alpha);
         
-	
 	}
 	
+	
+	
+    /**
+     * 
+     * main function which prints the frequent itemsets 
+     * @param tree fp_tree 
+     * @param minsup minimum support value 
+     * 
+     */
 	
 	private void mine_itemsets(HashMap<String, Integer> L, FP_Tree tree , 
 	List<String> sorted_by_supp_count , int minsup , 
@@ -89,7 +109,6 @@ public class FP_Growth {
 		
 		else {
 			
-		
 		    int index = sorted_by_supp_count.size()-1;
 
 		    while(true) {
@@ -142,7 +161,8 @@ public class FP_Growth {
 
 			   HashMap<String , Integer> freq_1_itemsets = find_freq_1_itemsets(table , minsup);
 			   
-			   List<String> sorted_items = new ArrayList<String>(sort_by_supp_count(freq_1_itemsets));
+			   List<String> sorted_items = new ArrayList<String>
+			   (sort_by_supp_count(freq_1_itemsets));
 			    
 			   HashMap<String , List<String>> new_table = new HashMap<String , List<String>>();
 			    new_table = sort_in_L_order(table , sorted_items);
@@ -152,43 +172,57 @@ public class FP_Growth {
 		       cond_tree = construct_fp_tree(new_table);
 		       
 		       
-		       mine_itemsets(freq_1_itemsets , cond_tree , sorted_items , minsup , freq_items , alpha);
+		       mine_itemsets(freq_1_itemsets , cond_tree , sorted_items , 
+		    		   minsup , freq_items , alpha);
 
 		       alpha = null;
-		       if(Beta != null) {
+		       if(Beta != null) 
 		           alpha = new HashSet<String>(Beta);
-
-		       }
 		    
-		    }
+		     }
 			
 		  }
-		
-		  
+		 
 	}
-		
 	
+	
+	
+	/**
+	 * 
+	 * @param items list of current itemsets
+	 * @param J input itemset
+	 * @return true of the itemset already exists
+	 * 
+	 */
 	
 	private Boolean already_found(List<Itemset> items , Itemset J) {
 		
 		for(Itemset T: items) {
 			
-			if(equal(J.get_items() , T.get_items()))
+			if(equal(J.get_items() , T.get_items()))  // equate itemsets  
 				    return true; 
 		}
 		
-		return false;
+		return false; // set not found 
 		
 	}
 	
 	
 	
+	/**
+	 * 
+	 * @param x first set
+	 * @param y second set
+	 * @return true if the two sets are equal
+	 * 
+	 */
+	
 	private Boolean equal(Set<String> x , Set<String> y) {
 		
-		if(x.size() != y.size())
+		if(x.size() != y.size()) // number of items don't match
 			return false;
 		
-		for(String s: x) {
+		for(String s: x) {  // check if each item in set x is part of set y
 			
 			if(y.contains(s) == false)
 				return false;
@@ -201,6 +235,14 @@ public class FP_Growth {
 	}
 	
 
+    
+	/**
+	 * 
+	 * add data to the fp_tree
+	 * @param table
+	 * @return fp_tree
+	 * 
+	 */
 	
 	private FP_Tree construct_fp_tree(HashMap<String , List<String>> table) {
 		
@@ -214,6 +256,7 @@ public class FP_Growth {
         		branch.add(n);
         		
         	}
+        	
         	tree.insert(branch);
         	
         }
@@ -223,6 +266,14 @@ public class FP_Growth {
 	}
 	
 	
+	
+	/**
+	 * 
+	 * @param table table of transactions 
+	 * @param sorted_items items sorted by support count 
+	 * @return new table with items sorted by support count 
+	 * 
+	 */
 	
 	private HashMap<String , List<String>> sort_in_L_order(HashMap<String , 
 		Set<String>> table , List<String> sorted_items) {
@@ -247,13 +298,22 @@ public class FP_Growth {
 			
 		}
 		
-		
 	    return new_table;
+	
 	}
 	
 	
 	
-    private HashMap<String , Set<String >> create_table(String input_file) throws IOException {
+	/**
+	 * 
+	 * @param input_file file with the list of transactions and transaction IDs
+	 * @return a table of transactions 
+	 * @throws IOException if the file cannot be found 
+	 * 
+	 */
+	
+    private HashMap<String , Set<String >> create_table(String input_file) 
+    		throws IOException {
  	   
     	/* table of transactions */
 		HashMap<String , Set<String> > table = new 
@@ -292,6 +352,14 @@ public class FP_Growth {
     
     
     
+    /**
+     * 
+     * @param table table of transaction data
+     * @param min_sup minimum support value 
+     * @return single itemset -> frequency mapping 
+     * 
+     */
+    
     private HashMap<String , Integer> find_freq_1_itemsets(HashMap<String , 
      	   Set<String>> table , int min_sup) {
  	 
@@ -321,12 +389,18 @@ public class FP_Growth {
  	   
  	   return l1_count;
  	   
-     }
+    }
     
     
+    
+    /**
+     * 
+     * @param L itemset -> frequency mapping 
+     * @return itemsets sorted by their frequencies
+     * 
+     */
     
     private List<String> sort_by_supp_count(HashMap<String , Integer> L) {
-    	
     	
        	List<Integer> supp_counts = new ArrayList<Integer>();
        	
@@ -349,10 +423,10 @@ public class FP_Growth {
        		
        	}
        	
-       	
        	return sorted_items;
-
+    
     }
 
 
+    
 }
