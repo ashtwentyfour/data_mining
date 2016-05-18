@@ -1,0 +1,5 @@
+version: '2'
+services:
+   fp_growth:
+     image: cb3b28a4624a
+     container_name: fp_growth_algorithm

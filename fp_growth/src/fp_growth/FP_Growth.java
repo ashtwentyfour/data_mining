@@ -24,7 +24,7 @@ public class FP_Growth {
 	 * 
 	 */
 	
-	public void fp_algorithm(String file , int minsup) {
+	public void fp_algorithm(String file , int minsup) throws FileNotFoundException {
 		
 		if(minsup <= 0)
 			throw new IllegalArgumentException("minsup > 0");
