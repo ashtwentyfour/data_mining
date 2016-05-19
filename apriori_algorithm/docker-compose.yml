@@ -1,0 +1,5 @@
+version: '2'
+services:
+   apriori:
+     image: ashtwentyfour/data_mining_apriori_algo:latest
+     container_name: apriori_algorithm

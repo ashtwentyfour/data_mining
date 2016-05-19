@@ -29,7 +29,7 @@ public class Apriori {
 	  * 
 	 */
 	
-     public Set<Set<String>> freq_itemsets(String input_file , int min_sup) {
+     public Set<Set<String>> freq_itemsets(String input_file , int min_sup) throws FileNotFoundException {
     	 
        if(min_sup <= 0) 
     	   throw new IllegalArgumentException("min_sup > 0");

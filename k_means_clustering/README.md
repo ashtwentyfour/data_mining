@@ -12,6 +12,13 @@ This package can be used to cluster data using the k - means algorithm
 - the tuples along with the cluster (center) they belong to will be printed
 - example in Driver.java 
 
+**TO BUILD DOCKER IMAGE**
+
+- run 'docker build .' and run 'docker run <Image ID>'
+
+**TO RUN USING DOCKER COMPOSE**
+
+- run 'docker-compose up'
 
 
 

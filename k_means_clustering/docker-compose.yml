@@ -1,0 +1,5 @@
+version: '2'
+services:
+   k_means:
+     image: ashtwentyfour/data_mining_k_means_clustering:latest
+     container_name: k_means_clustering__algorithm
