@@ -11,13 +11,13 @@ This package can be used to extract frequent itemsets from a set of transactions
 - example provided in Driver.java
 - minimum support > 0
 
-**To build docker image**
+**TO BUILD DOCKER IMAGE**
 
 - run 'docker build -t <image_name> .'
 - deploy container 'docker run image_name'
 - the change the input to the image, change the input file in test_cases and build the image once again 
 
-**To run using docker compose**
+**TO RUN USING docker-compose**
 
 - run 'docker-compose up'
 

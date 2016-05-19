@@ -1,0 +1,5 @@
+version: '2'
+services:
+   fp_growth:
+     image: ashtwentyfour/data_mining_id3_decision_tree
+     container_name: id3_decision_tree

@@ -8,10 +8,14 @@ public class Driver {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
+                if(args.length <= 0) {
+                   System.err.println("Enter Input File path");
+                   System.exit(0);
+                }
+
 		/* building decision tree using training data set */
 		ID3 id = new ID3();
-		String file = "/Users/ashtwentyfour/Documents/Ashwin/Programming_Projects"
-				+ "/Data_Mining/decision_tree_id3/src/id3_decision_tree/test_cases/test_input.txt";
+		String file = args[0];
 		id.train_data(file , "Play"); // also specifying the decision attribute - Play? Yes or No
 		
 		/* test case/tuple - Decision ?*/
