@@ -1,5 +1,5 @@
 version: '2'
 services:
    fp_growth:
-     image: 1bdd0dd2e249
+     image: ashtwentyfour/data_mining_fp_growth
      container_name: fp_growth_algorithm
