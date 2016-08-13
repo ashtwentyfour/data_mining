@@ -22,6 +22,8 @@ COPY run_fpgrowth.sh /code/run_fpgrowth.sh
 
 COPY run_kmeans.sh /code/run_kmeans.sh
 
+COPY index.html /code/index.html
+
 WORKDIR /code
 
 RUN npm install
