@@ -19,6 +19,7 @@ public class Driver {
 	   // get frequent itemsets
 	   Set<Set<String>> frequent_sets = new HashSet<Set<String>>(a.freq_itemsets(file , 2));
 	   System.out.print(frequent_sets);
+	   System.out.println("");
 
 	}
 

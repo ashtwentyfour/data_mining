@@ -1,1 +1,10 @@
 **/bin
+**/node_modules
+**/apriori_uploads
+**/id3_uploads
+**/fpgrowth_uploads
+**/kmeans_uploads
+**/apriori_output.txt
+**/id3_output.txt
+**/fpgrowth_output.txt
+**/kmeans_output.txt
