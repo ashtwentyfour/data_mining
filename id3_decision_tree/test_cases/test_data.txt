@@ -1,0 +1,2 @@
+Day Outlook   Humidity   Wind    
+D1  Rain      High       Weak  

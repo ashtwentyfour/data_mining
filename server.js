@@ -64,7 +64,7 @@ app.post('/kmeans', function (req, res) {
 
 app.post('/id3', function (req, res) {
 
-    var rename_file = exec('mv '+req.file.path+' id3_uploads/input.txt', function(error, stdout, stderr) {
+    var rename_file = exec('mv '+req.file.path+' id3_uploads/training_data.txt', function(error, stdout, stderr) {
                             if (error !== null) {
                                console.log('exec error: ' + error);
                             }
@@ -79,6 +79,20 @@ app.post('/id3', function (req, res) {
         message:'ID3 Decision Tree Algorithm execution successful'
     };
     console.log(response);
+});
+
+app.post('/id3_input', function (req, res) {
+
+    var rename_file = exec('mv '+req.file.path+' id3_uploads/test_data.txt', function(error, stdout, stderr) {
+                            if (error !== null) {
+                               console.log('exec error: ' + error);
+                            }
+                      });
+    response = {
+        message:'ID3 Decision Tree Test Data Uploaded'
+    };
+    console.log(response);
+    res.end('Test Data File Uploaded');
 });
 
 app.post('/fpgrowth', function (req, res) {
